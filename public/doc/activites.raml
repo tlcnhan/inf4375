@@ -1,0 +1,44 @@
+#%RAML 1.0
+
+title: Activités sportives de ville de Montréal
+version: 1
+baseUri: http://localhost:3000/
+
+/doc/:
+    get:
+        description: Retourne la documentation complète du projet
+        responses:
+            200:
+                body:
+                    text/html:
+					
+/patinoires/:
+    get:
+        description: Retourne la liste de tous les patinoires
+        responses:
+            200:
+                body:
+                    application/json:
+                        example: |
+                            "patinoires": [    
+								{
+									"_id" : ObjectId("5a06119a33b194281812cb59"),
+									"nom" : "Pat. avec bandes - près chalet, parc LaSalle (PSE)",
+									"ouvert" : "",
+									"deblaye" : "",
+									"arrose" : "",
+									"resurface" : "",
+									"condition" : "Mauvaise",
+									"arrondissement" : [
+										{
+											"nom_arr" : "Lachine",
+											"cle" : "lch",
+											"date_maj" : "2017-02-20 13:45:14",
+											"_id" : ObjectId("5a06119a33b194281812cb5a")
+										}	
+									],
+									"__v" : 0
+								}		
+    
+/
+
