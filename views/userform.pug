@@ -1,0 +1,19 @@
+extends layout
+
+block content
+	script(src="javascripts/user.js")
+	
+	h1= title
+	label Prénom : 
+	input#champ-prenom(type="string")
+	br
+	label Nom : 
+	input#champ-nom(type="string")
+	br
+	label Courriel : 
+	input#champ-courriel(type="string")
+	br
+	label Arrondissements : 
+	input#champ-nom-arr(type="string")
+	br
+	button(onclick='post();') Créer

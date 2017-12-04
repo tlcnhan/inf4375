@@ -13,10 +13,12 @@ var Installation_Schema = require(__dirname+'/../models/installation');
 var User_Schema = require(__dirname+'/../models/user');
 
 // Index
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Projet de session INF4375' });
+router.get('/', function(req, res) {	
+    res.render('index');
 });
-
+router.get('/userform', function(req, res) {	
+    res.render('userform', {title:"Création de dossier d'utilisateur"});
+});
 //----------------------
 // A3 : RAML
 //----------------------
@@ -35,9 +37,11 @@ router.get('/doc', function(req, res) {
 router.get('/all', function(req, res, next) {
     Installation_Schema.find({}, function (err, insta) {
         if (err) return handleError(err);
-
+		
         res.header("Content-Type", "application/json");
         res.send({"installations" : insta }); 
+
+        //res.render('index', {installations:insta.results, title:'Installations'});
     });
 });
 
@@ -45,50 +49,81 @@ router.get('/all', function(req, res, next) {
 // A4,A5: Retourne la liste des installations pour un arrondissement
 //---------------------------------------------------------------------
 router.get('/installations', function(req, res, next) {
-    if('arrondissement' in req.query)
-    {
+    if('arrondissement' in req.query){
         Installation_Schema.find({$or: [{'arrondissement.nom_arr': req.query['arrondissement']},
 										{'nom_arr': req.query['arrondissement']}]}, function (err, insta) {
             if (err) return handleError(err);
-			//res.json(insta);
+			
             res.header("Content-Type", "application/json");
-            res.send({"installations" : insta }); 
-			//res.render("index");
+            res.send({"installations":insta}); 	
         }); 
     }
 	// A6: Retourne les installations par nom
-	else if('nom' in req.query)
-    {
+	else if('nom' in req.query){
         Installation_Schema.find({'nom': req.query['nom']}, function (err, insta) {
             if (err) return handleError(err);
 
             res.header("Content-Type", "application/json");
-            res.send({"installations" : insta}); 
+            res.send({"installations" : insta});
+				
         });
     }
 	//------------------------------------------------
 	// C1,C2,C3 : installations  selon condition 
 	//-----------------------------------------------
-	else if('condition' in req.query)
-    {
+	else if('condition' in req.query){
         Installation_Schema.find({'condition': req.query['condition']}, function (err, insta) {
             if (err) return handleError(err);
 			
 			var liste = [];
 			for (i in insta){
+				var nom_arr_verif = '';
+				var cle = '';
+				var date_maj = '';
+				if(insta[i].nom_arr != undefined) {
+					nom_arr_verif = insta[i].nom_arr;
+				} else {
+					nom_arr_verif = insta[i].arrondissement[0].nom_arr;
+					cle = insta[i].arrondissement[0].cle;
+					date_maj = insta[i].arrondissement[0].date_maj;
+				}
 				liste.push({
 					nom : insta[i].nom,
+					nom_arr : nom_arr_verif,
+					cle : cle,
+					date_maj : date_maj,
+					adresse : insta[i].adresse,
+					type : insta[i].type,
 					ouvert : insta[i].ouvert,
 					deblaye : insta[i].deblaye,
+					arrose : insta[i].arrose,
+					resurface : insta[i].resurface,
 					condition : insta[i].condition,
-					nom_arr : insta[i].arrondissement.nom_arr,
-					cle : insta[i].arrondissement.cle,
-					date_maj : insta[i].arrondissement.date_maj,
+					proprete : insta[i].proprete,
+					gestion : insta[i].gestion,
+					equipement :insta[i].equipement			
 				});
 			}
-			liste.sort(function(a,b){
-					return a.nom - b.nom;
-				});
+			function compare(a,b) {
+				if (a.nom < b.nom)
+					return -1;
+				if (a.nom > b.nom)
+					return 1;
+				return 0;
+			}
+			// C1 : liste texte en json, en ordre croissant
+			liste.sort(compare);
+			var liste_obj = {};
+			var i = 0;		
+			liste.forEach(function(obj){
+				liste_obj[i] = obj;
+				i++;
+			});
+			if (!req.query['type']){	
+				res.header("Content-Type", "application/json; charset=utf-8");
+				res.send({"installations":liste_obj});
+				//res.send(liste);
+			}
 			//C2 : liste en XML 
 			if(req.query['type'] == 'XML' || req.query['type'] == 'xml'){
                 var js2xmlparser = require("js2xmlparser");
@@ -97,7 +132,7 @@ router.get('/installations', function(req, res, next) {
                 res.send(xml); 
             }
 			//C3 : liste en CSV
-			if(req.query['type'] == 'CSV' || req.query['type'] == 'csv'){
+			else if(req.query['type'] == 'CSV' || req.query['type'] == 'csv'){
                  var json2csv = require('json2csv');
 
                 try {
@@ -109,11 +144,8 @@ router.get('/installations', function(req, res, next) {
                     console.error(err);
                 }
             }
-			// C1 : liste texte, en ordre croissant
-			else {	
-				res.header("Content-Type", "text/plain; charset=utf-8");
-				res.send(liste); 
-			}
+			
+		
         });
     }
     else
@@ -165,22 +197,11 @@ router.delete('/all/:id', function(req, res) {
 // E1 : createUser profile
 //------------------------------------------------
 router.post('/users', function(req, res) {
-  if (req.body.u_nom && req.body.u_prenom && req.body.u_courriel ){
-	var user = {"nom": req.body.u_nom,
-				"prenom": req.body.u_prenom,
-				"courriel": req.body.u_courriel,
-				"nom_arr_surv": [
-								req.body.u_nom_arr1,
-								req.body.u_nom_arr2,
-								req.body.u_nom_arr3
-								]
-				};
-  
-	var result = jsonschema.validate(user, schemas.createUser);
+	var result = jsonschema.validate(req.body, schemas.createUser);
 	if (result.errors.length > 0) {
 		res.status(400).json(result);
     } else {   		
-		var u_schema = new User_Schema(user);
+		var u_schema = new User_Schema(req.body);
 		u_schema.save(function(err, u_schema) {
 			if (err) {
 				console.log(err);
@@ -191,9 +212,6 @@ router.post('/users', function(req, res) {
 			}
 		});
 	}
-  } else {
-	  res.send("form not completed");
-  }		
 });	
 
 //-----------------------------------------------

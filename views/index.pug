@@ -1,65 +1,42 @@
-doctype html
-html
-	head
-		meta(charset="utf-8")
-		title INF4375
-		link(rel="stylesheet", href="stylesheets/style.css")
-		script(src="javascripts/ops.js")
-		script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
-		
-	body    
+extends layout
+
+block content
+	script(src="javascripts/ops.js")
+		    
 	h1 INF4375 - recherche des intallations sportives
 	
-	p Par nom d'arrondissement
-	form#i_nom_arr(name="nom_arrondissement", action="/installations")
-		div.input
-			span.label Arrondissement : 		
-			input(type="string", name="arrondissement", id="arrondissement")
-		br
-		div.actions
-			input(type="submit", value="Rechercher")
+	h3 Par nom d'arrondissement : 
+	input#champ-nom-arr(type="string")
+	br
+	button(onclick='get_avec_nom_arr();') Rechercher
+	#result
+		p#res-nom-arr
 	
-	p Par condition d'installation
-	form#i_condition(name="condition_insta", action="/installations")
-		div.input
-			span.label Condition : 		
-			input(type="string", name="condition", id="condition")
-		br
-		div.actions
-			input(type="submit", value="Rechercher")
+	h3 Liste des installations
+	table(border)
+		thead
+			tr
+				th Installations
+		tbody
 			
 	br
-	p Par nom d'établissement
-	form#i_nom(name="nom", action="/installations")
-		div.input
-			span.label Nom : 		
-			input(type="string", name="nom", id="nom")
-		br
-		div.actions
-			input(type="submit", value="Rechercher")
+	h3 Par nom d'installation :
+	select#options(name="nom")
+	br
+	button(onclick='get_avec_nom();') Chercher
 		
-		br
-		select#options(name="nom_insta")
-		
-		
-	#liste_installations
+	#liste-installations
+		p#i-nom
 	
-	h3 Création de dossier d'utilisateur
-	form#u_dossier(name="u_dossier", action="/users", method="post")
-		div.input
-			span.label Nom : 		
-			input(type="string", name="u_nom", id="u_nom")
-			br
-			span.label Prénom : 		
-			input(type="string", name="u_prenom", id="u_prenom")
-			br
-			span.label Courriel : 		
-			input(type="string", name="u_courriel", id="u_courriel")
-			br
-			span.label Liste d'arrondissement à surveiller :			
-			input(type="string", name="u_nom_arr1", id="u_nom_arr1")
-			input(type="string", name="u_nom_arr2", id="u_nom_arr3")
-			input(type="string", name="u_nom_arr3", id="u_nom_arr3")
-		br
-		div.actions
-			input(type="submit", value="Créer")
+	p#res-nom
+	
+	br
+	h3 Par conditions des installations :
+	input#champ-condition(type="string")
+	br
+	button(onclick='get_avec_condition();') Chercher
+		
+	#liste-insta-condition
+		p#i-condition
+	
+	p#res-condition

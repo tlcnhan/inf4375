@@ -88,9 +88,9 @@ xmlToJson(url2, function(err, data) {
   var patinoires_json = data;
 	
   for(var i in patinoires_json.patinoires.patinoire){
-        p = patinoires_json.patinoires.patinoire[i];	
+        p = patinoires_json.patinoires.patinoire[i];		
         var p_schema = new Installation_Schema(p);
-
+		
         p_schema.save(function (err, p_schema) {
             if (err) return console.error(err);
         });
@@ -124,9 +124,9 @@ function xmlToJson(url, callback) {
     res.on('error', function(e) {
       callback(e, null);
     }); 
-    res.on('timeout', function(e) {
-      callback(e, null);
-    }); 
+	//res.on('timeout', function(e) {
+     // callback(e, null);
+   // }); 
     res.on('end', function() {
       parseString(xml, function(err, result) {
         callback(null, result);

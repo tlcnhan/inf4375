@@ -40,11 +40,11 @@ module.exports = {
     required: true,
     additionalProperties: false,
     properties: {
-      nom: {
+      prenom: {
         type: "string",
         required: true
       },
-      prenom: {
+      nom: {
         type: "string",
         required: true
       },
