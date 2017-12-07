@@ -31,7 +31,7 @@ services à partir de ces données.
      Liste des installations retournée affichée dans un tableau.   
  Testé en donnant un nom au formulaire HTML avec Chrome et une liste des installations
  affichée dans le tableau voulu.  
- Le formulaire est sur la page d'accueil '/'.  
+ Le formulaire est sur la page d'accueil "http://localhost:3000/".  
  
 - A6: Une liste déroulante de toutes les installations et une service REST
       avec un nom d'installations en paramètre retourne les information de cette installation.  
@@ -71,7 +71,7 @@ services à partir de ces données.
 
 - E2: service REST permet de créer un profile d'utilisateur avec une interface graphique en HTML.  
  Testé en donnant les information au formulaire HTML à la page
- 'localhost:3000/userform' et vérifie les information des utilisateurs auprès mongoDB.  
+ "http://localhost:3000/userform" et vérifie les information des utilisateurs auprès mongoDB.  
  use inf4375  
  db.users.find().pretty()
  
