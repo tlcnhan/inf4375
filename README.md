@@ -11,7 +11,7 @@ services à partir de ces données.
 Prérequis:
 ==========
 * node: 8.6.0 
-* MongoDB:3.4.9
+* MongoDB: 3.4.9
 
 
 Commandes pour construire la BD
@@ -23,14 +23,15 @@ Commandes pour construire la BD
   npm install
   npm start
 ```
-* À l'aide d'un client mongo exécuter et 
+- À l'aide d'un client mongo exécuter et 
   vérifier que la création de la BD est correcte
 ```Shell
 use inf4375
 show collections
 ```
-Résultats attendus
---------------------------------
+
+- Résultats attendus
+
 ```Shell
 Installations
 Users
@@ -40,13 +41,14 @@ Users
 localhost:3000/
 ```
 
-* La documentation de l'utilsation est disponible à:
+- La documentation de l'utilsation est disponible à:
 ```
 localhost:3000/doc
 ```
 
 Exemples de donnée JSON
 =======================
+```
 "installation": [    
             {
                 "_id" : "5a06119a33b194281812cb59",
@@ -82,7 +84,8 @@ Exemples de donnée JSON
                 "latitude":"45.552526",
                 "__v":0,
                 "arrondissement":[]
-            }				
+            }
+```			
 Dépendences
 ============
 *    "body-parser": "~1.18.2",
