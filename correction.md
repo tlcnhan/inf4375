@@ -16,7 +16,7 @@ services à partir de ces données.
    . db.installations.find().pretty()  
    
 - A2: l'importation est schedulé à minuit de tous les jours.  
-  Testé en reglant l'heure voulue et révérifier la base de données,  
+  Testé en reglant l'heure voulue et révérifier la base de données,
   date de création du nouveau fichier téléchargé et le log à l'écran.
   
 - A3: système écoute sur port 3000, route '/doc' affiche la documentation de tous
@@ -28,7 +28,7 @@ services à partir de ces données.
  Testé 'localhost:3000/installations?arrondisement=LaSalle' et Chrome retourne texte en json.
  
 - A5: service REST avec un nom d'arrondisement en paramètre à partir d'un formulaire HTML.  
-     Liste des installations retournée affichée dans un tableau  
+     Liste des installations retournée affichée dans un tableau.   
  Testé en donnant un nom au formulaire HTML avec Chrome et une liste des installations
  affichée dans le tableau voulu.  
  Le formulaire est sur la page d'accueil '/'.  
@@ -69,8 +69,7 @@ services à partir de ces données.
  use inf4375  
  db.users.find().pretty()
 
-- E2: service REST permet de créer un profile d'utilisateur    
-    avec une interface graphique en HTML.  
+- E2: service REST permet de créer un profile d'utilisateur avec une interface graphique en HTML.  
  Testé en donnant les information au formulaire HTML à la page
  'localhost:3000/userform' et vérifie les information des utilisateurs auprès mongoDB.  
  use inf4375  
