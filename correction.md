@@ -1,6 +1,6 @@
 # Travail de session INF4375
 
-TRAN, Le Cong Nhan
+TRAN, Le Cong Nhan  
 TRAL24017901
 
 ## Description
@@ -10,10 +10,10 @@ services à partir de ces données.
 
 ## Services dévéloppés
 
-- A1: obtenir 3 listes de données et les stocker dans une base de données MongoDB.
-  Testé avec les commandes de mongoDB pour voir le contenu de la base de données.
-   . use inf4375
-   . db.installations.find().pretty()
+- A1: obtenir 3 listes de données et les stocker dans une base de données MongoDB.  
+  Testé avec les commandes de mongoDB pour voir le contenu de la base de données.  
+   . use inf4375   
+   . db.installations.find().pretty()  
    
 - A2: l'importation est schedulé à minuit de tous les jours.
   Testé en reglant l'heure voulue et révérifier la base de données,
