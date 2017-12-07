@@ -1,6 +1,6 @@
 # Travail de session INF4375
 
-TRAN, Le Cong Nhan
+TRAN, Le Cong Nhan  
 TRAL24017901
 
 ## Description
@@ -8,14 +8,14 @@ TRAL24017901
 Le projet consiste à récupérer un ensemble de données provenant de la ville de Montréal et d'offrir des
 services à partir de ces données.
 
-Prérequis:
-==========
+## Prérequis:
+
 * node: 8.6.0 
 * MongoDB: 3.4.9
 
 
-Commandes pour construire la BD
-===================================
+## Commandes pour construire la BD
+
 1. Démarrer serveur mongo et node js.
 2. Exécuter:
 ```Shell
@@ -38,16 +38,25 @@ Users
 ```
 3.Puis utiliser un fureteur, l'application est disponible à:
 ```
-localhost:3000/
+http://localhost:3000/ et http://localhost:3000/userform
+
 ```
+## Fonctionnalités
+
+* Recherche des installations par arrondissement.
+* Recherche des installations par nom.
+* Rechercher des installations par condition.
+* Modifier d'une installation.
+* Supprimer d'une installation.
+* Créer un profil d'utilisateur.
 
 - La documentation de l'utilsation est disponible à:
 ```
-localhost:3000/doc
+http://localhost:3000/doc
 ```
 
-Exemples de donnée JSON
-=======================
+## Exemples de donnée JSON
+
 ```
 "installation": [    
             {
