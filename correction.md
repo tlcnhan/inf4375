@@ -21,11 +21,11 @@ services à partir de ces données.
   
 - A3: système écoute sur port 3000, route '/doc' affiche la documentation de tous
       les services REST du programme.  
-  Testé : "localhost:3000/doc" avec le fureteur Chrome.
+  Testé : "http://localhost:3000/doc" avec le fureteur Chrome.
   
 - A4: service REST avec un nom d'arrondisement en paramètre  
      ex: GET /installations?arrondisement=LaSalle  
- Testé "localhost:3000/installations?arrondisement=LaSalle" et Chrome retourne texte en json.
+ Testé "http://localhost:3000/installations?arrondisement=LaSalle" et Chrome retourne texte en json.
  
 - A5: service REST avec un nom d'arrondisement en paramètre à partir d'un formulaire HTML.  
      Liste des installations retournée affichée dans un tableau.   
