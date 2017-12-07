@@ -14,7 +14,7 @@ services à partir de ces données.
 * MongoDB: 3.4.9
 
 
-## Commandes pour construire la BD
+## Installation:
 
 1. Démarrer serveur mongo et node js.
 2. Exécuter:
@@ -39,21 +39,19 @@ Users
 3.Puis utiliser un fureteur, l'application est disponible à:
 ```
 http://localhost:3000/ et http://localhost:3000/userform
-
 ```
-## Fonctionnalités
-
-* Recherche des installations par arrondissement.
-* Recherche des installations par nom.
-* Rechercher des installations par condition.
-* Modifier d'une installation.
-* Supprimer d'une installation.
-* Créer un profil d'utilisateur.
-
 - La documentation de l'utilsation est disponible à:
 ```
 http://localhost:3000/doc
 ```
+## Fonctionnalités
+
+* Rechercher des installations par arrondissement.
+* Rechercher des installations par nom.
+* Rechercher des installations par condition.
+* Modifier d'une installation.
+* Supprimer d'une installation.
+* Créer un profil d'utilisateur.
 
 ## Exemples de donnée JSON
 
